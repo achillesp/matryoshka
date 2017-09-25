@@ -2,34 +2,72 @@
 
 namespace Achillesp\Babushka;
 
-use Cache;
+use Illuminate\Contracts\Cache\Repository as Cache;
 
 class RussianCaching
 {
-    protected static $keys = [];
+    /**
+     * The cache repository.
+     *
+     * @var Cache
+     */
+    protected $cache;
 
-    public static function setUp($model)
+    /**
+     * RussianCaching constructor.
+     *
+     * @param Cache $cache
+     */
+    public function __construct(Cache $cache)
     {
-        static::$keys[] = $key = $model->getCacheKey();
-
-        // Turn on output buffering
-        ob_start();
-
-        // return a boolean that indicates if we have cached this model yet
-        return Cache::has($key);
+        $this->cache = $cache;
     }
 
-    public static function tearDown()
+    /**
+     * Put to the cache.
+     *
+     * @param mixed  $key
+     * @param string $fragment
+     *
+     * @return mixed
+     */
+    public function put($key, $fragment)
     {
-        // fetch the cache key
-        $key = array_pop(static::$keys);
+        $key = $this->normalizeCacheKey($key);
 
-        // save the output buffer contents to a var, called $html
-        $html = ob_get_clean();
+        return $this->cache
+            ->rememberForever($key, function () use ($fragment) {
+                return $fragment;
+            });
+    }
 
-        // cache it, if necessary, and echo out the html
-        return Cache::rememberForever($key, function () use ($html) {
-            return $html;
-        });
+    /**
+     * Check if the given key exists in the cache.
+     *
+     * @param mixed $key
+     *
+     * @return bool
+     */
+    public function has($key)
+    {
+        $key = $this->normalizeCacheKey($key);
+
+        return $this->cache
+            ->has($key);
+    }
+
+    /**
+     * Normalize the cache key.
+     *
+     * @param mixed $key
+     * @return mixed
+     */
+    protected function normalizeCacheKey($key)
+    {
+        if ($key instanceof \Illuminate\Database\Eloquent\Model) {
+            return $key->getCacheKey();
+        }
+
+        return $key;
     }
 }
