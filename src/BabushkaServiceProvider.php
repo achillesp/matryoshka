@@ -15,11 +15,11 @@ class BabushkaServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('cache', function ($expression) {
-            return "<?php if (! app('Achillesp\Babushka\BladeDirective')::setUp({$expression})) { ?>";
+            return "<?php if (! app('Achillesp\Babushka\BladeDirective')->setUp({$expression})) { ?>";
         });
 
         Blade::directive('endcache', function () {
-            return "<?php } echo app('Achillesp\Babushka\BladeDirective')::tearDown() ?>";
+            return "<?php } echo app('Achillesp\Babushka\BladeDirective')->tearDown() ?>";
         });
     }
 
