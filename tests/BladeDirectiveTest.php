@@ -1,7 +1,7 @@
 <?php
 
-use Achillesp\Babushka\RussianCaching;
-use Achillesp\Babushka\BladeDirective;
+use Achillesp\Matryoshka\RussianCaching;
+use Achillesp\Matryoshka\BladeDirective;
 
 /**
  * @coversBladeDirective

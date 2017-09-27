@@ -1,11 +1,11 @@
 <?php
 
-namespace Achillesp\Babushka;
+namespace Achillesp\Matryoshka;
 
 use Blade;
 use Illuminate\Support\ServiceProvider;
 
-class BabushkaServiceProvider extends ServiceProvider
+class MatryoshkaServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -15,11 +15,11 @@ class BabushkaServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('cache', function ($expression) {
-            return "<?php if (! app('Achillesp\Babushka\BladeDirective')->setUp({$expression})) { ?>";
+            return "<?php if (! app('Achillesp\Matryoshka\BladeDirective')->setUp({$expression})) { ?>";
         });
 
         Blade::directive('endcache', function () {
-            return "<?php } echo app('Achillesp\Babushka\BladeDirective')->tearDown() ?>";
+            return "<?php } echo app('Achillesp\Matryoshka\BladeDirective')->tearDown() ?>";
         });
     }
 

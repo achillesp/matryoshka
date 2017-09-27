@@ -1,5 +1,5 @@
 {
-    "name": "achillesp/babushka",
+    "name": "achillesp/matryoshka",
     "description": "Russian Doll Caching for Laravel.",
     "license": "MIT",
     "keywords": ["laravel", "cache"],
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Achillesp\\Babushka\\": "src/"
+            "Achillesp\\Matryoshka\\": "src/"
         }
     },
     "autoload-dev": {

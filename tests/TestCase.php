@@ -41,5 +41,5 @@ abstract class TestCase extends BaseCase
 
 class Post extends \Illuminate\Database\Eloquent\Model
 {
-    use Achillesp\Babushka\Cacheable;
+    use Achillesp\Matryoshka\Cacheable;
 }

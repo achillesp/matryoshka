@@ -1,6 +1,6 @@
 <?php
 
-use Achillesp\Babushka\RussianCaching;
+use Achillesp\Matryoshka\RussianCaching;
 
 /**
  * @coversRussianCaching

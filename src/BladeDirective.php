@@ -1,6 +1,6 @@
 <?php
 
-namespace Achillesp\Babushka;
+namespace Achillesp\Matryoshka;
 
 class BladeDirective
 {
