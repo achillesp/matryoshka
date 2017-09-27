@@ -31,7 +31,9 @@ class BabushkaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(BladeDirective::class, function () {
-            return new BladeDirective();
+            return new BladeDirective(
+                new RussianCaching(app('Illuminate\Contracts\Cache\Repository'))
+            );
         });
     }
 }
