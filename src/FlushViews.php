@@ -1,6 +1,6 @@
 <?php
 
-namespace Achillesp\Matryoshka\Middleware;
+namespace Achillesp\Matryoshka;
 
 use Cache;
 
