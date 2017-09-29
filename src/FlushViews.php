@@ -6,12 +6,17 @@ use Cache;
 
 class FlushViews
 {
+    /**
+     * Handle the request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
+     * @return mixed
+     */
     public function handle($request, $next)
     {
-        if ('local' === app()->environment()) {
-            // Clear the view-specific cache.
-            Cache::flush();
-        }
+        Cache::flush();
 
         return $next($request);
     }

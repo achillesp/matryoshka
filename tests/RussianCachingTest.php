@@ -13,12 +13,12 @@ class RussianCachingTest extends TestCase
         $post = $this->makePost();
 
         $cache = new \Illuminate\Cache\Repository(
-            new \Illuminate\Cache\ArrayStore
+            new \Illuminate\Cache\ArrayStore()
         );
 
         $cache = new RussianCaching($cache);
 
-        $cache->put($post, 'some html fragment');
+        $cache->put($post, '<div>some html fragment</div>');
 
         $this->assertTrue($cache->has($post->getCacheKey()));
         $this->assertTrue($cache->has($post));

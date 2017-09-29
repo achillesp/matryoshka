@@ -1,9 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase as BaseCase;
 use Illuminate\Database\Capsule\Manager as DB;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
-abstract class TestCase extends BaseCase
+abstract class TestCase extends BaseTestCase
 {
     public function setUp()
     {
