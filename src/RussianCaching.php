@@ -14,13 +14,6 @@ class RussianCaching
     protected $cache;
 
     /**
-     * The cache tags used.
-     *
-     * @var array|\Illuminate\Config\Repository|mixed
-     */
-    protected $cache_tags;
-
-    /**
      * RussianCaching constructor.
      *
      * @param Cache $cache
@@ -28,7 +21,6 @@ class RussianCaching
     public function __construct(Cache $cache)
     {
         $this->cache = $cache;
-        $this->cache_tags = config('matryoshka.default_cache_tags') ?? [];
     }
 
     /**
@@ -43,8 +35,7 @@ class RussianCaching
     {
         $key = $this->normalizeCacheKey($key);
 
-        return $this->cache
-            ->tags($this->cache_tags)
+        return $this->getCacheWithTags()
             ->rememberForever($key, function () use ($fragment) {
                 return $fragment;
             });
@@ -61,9 +52,23 @@ class RussianCaching
     {
         $key = $this->normalizeCacheKey($key);
 
-        return $this->cache
-            ->tags($this->cache_tags)
-            ->has($key);
+        return $this->getCacheWithTags()->has($key);
+    }
+
+    /**
+     * Apply tags to cache if possible/available.
+     *
+     * @return Cache
+     */
+    public function getCacheWithTags()
+    {
+        if (method_exists($this->cache->getStore(), 'tags')) {
+            $cache_tags = config('matryoshka.default_cache_tags') ?? [];
+
+            return $this->cache->tags($cache_tags);
+        }
+
+        return $this->cache;
     }
 
     /**

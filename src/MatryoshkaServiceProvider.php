@@ -21,7 +21,7 @@ class MatryoshkaServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/matryoshka.php', 'matryoshka');
 
-        if ($this->app->isLocal()) {
+        if ($this->app->isLocal() && config('matryoshka.flush_cache_on_local')) {
             $kernel->pushMiddleware('Achillesp\Matryoshka\FlushViews');
         }
 
