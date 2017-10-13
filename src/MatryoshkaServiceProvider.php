@@ -15,6 +15,12 @@ class MatryoshkaServiceProvider extends ServiceProvider
      */
     public function boot(Kernel $kernel)
     {
+        $this->publishes([
+            __DIR__.'/../config/matryoshka.php' => config_path('matryoshka.php'),
+        ], 'config');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/matryoshka.php', 'matryoshka');
+
         if ($this->app->isLocal()) {
             $kernel->pushMiddleware('Achillesp\Matryoshka\FlushViews');
         }

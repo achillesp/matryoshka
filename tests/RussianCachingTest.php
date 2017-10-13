@@ -1,5 +1,7 @@
 <?php
 
+namespace Achillesp\Matryoshka\Test;
+
 use Achillesp\Matryoshka\RussianCaching;
 
 /**
@@ -22,5 +24,13 @@ class RussianCachingTest extends TestCase
 
         $this->assertTrue($cache->has($post->getCacheKey()));
         $this->assertTrue($cache->has($post));
+    }
+
+    /** @test */
+    public function it_does_not_throw_an_exception_when_model_config_is_null()
+    {
+        $this->app['config']->set('matryoshka.default_cache_tags', null);
+
+        $this->it_caches_the_given_key();
     }
 }

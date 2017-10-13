@@ -1,5 +1,7 @@
 <?php
 
+namespace Achillesp\Matryoshka\Test;
+
 /**
  * @coversCacheable
  */
@@ -14,7 +16,7 @@ class CacheableTest extends TestCase
 
         // and I need to verify the returned value.
         $this->assertSame(
-            'Post/1-'.$model->updated_at->timestamp,
+            'Achillesp\Matryoshka\Test\Models\Post/1-'.$model->updated_at->timestamp,
             $model->getCacheKey()
         );
     }

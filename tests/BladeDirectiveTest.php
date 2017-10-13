@@ -1,7 +1,10 @@
 <?php
 
+namespace Achillesp\Matryoshka\Test;
+
 use Achillesp\Matryoshka\BladeDirective;
 use Achillesp\Matryoshka\RussianCaching;
+use Achillesp\Matryoshka\Test\Models\UnCacheablePost;
 
 /**
  * @coversBladeDirective
@@ -63,7 +66,7 @@ class BladeDirectiveTest extends TestCase
 
         $post = $this->makePost();
 
-        $doll->has('Post/1-'.$post->updated_at->timestamp)->shouldBeCalled();
+        $doll->has('Achillesp\Matryoshka\Test\Models\Post/1-'.$post->updated_at->timestamp)->shouldBeCalled();
 
         $directive->setUp($post);
 
@@ -88,7 +91,7 @@ class BladeDirectiveTest extends TestCase
      * */
     public function it_throws_an_exception_if_it_cannot_determine_the_cache_key()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $directive = $this->createNewCacheDirective();
 
@@ -109,8 +112,4 @@ class BladeDirectiveTest extends TestCase
 
         return new BladeDirective($this->doll);
     }
-}
-
-class UnCacheablePost extends \Illuminate\Database\Eloquent\Model
-{
 }

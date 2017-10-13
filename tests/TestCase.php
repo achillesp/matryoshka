@@ -1,14 +1,27 @@
 <?php
 
-use Illuminate\Database\Capsule\Manager as DB;
-use PHPUnit\Framework\TestCase as BaseTestCase;
+namespace Achillesp\Matryoshka\Test;
 
-abstract class TestCase extends BaseTestCase
+use Achillesp\Matryoshka\MatryoshkaServiceProvider;
+use Achillesp\Matryoshka\Test\Models\Post;
+use Illuminate\Database\Capsule\Manager as DB;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
+
+abstract class TestCase extends OrchestraTestCase
 {
     public function setUp()
     {
+        parent::setUp();
+
         $this->setUpDatabase();
         $this->migrateTables();
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            MatryoshkaServiceProvider::class,
+        ];
     }
 
     protected function setUpDatabase()
@@ -37,9 +50,4 @@ abstract class TestCase extends BaseTestCase
 
         return $post;
     }
-}
-
-class Post extends \Illuminate\Database\Eloquent\Model
-{
-    use Achillesp\Matryoshka\Cacheable;
 }
