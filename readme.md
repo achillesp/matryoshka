@@ -10,7 +10,7 @@ This package is based on a series of laracasts lessons with a few modifications 
 From the command line, run:
 
 ```
-composer require laracasts/matryoshka
+composer require achillesp/matryoshka
 ```
 
 ### Step 2: Service Provider (Laravel < 5.5)
@@ -18,7 +18,7 @@ composer require laracasts/matryoshka
 For your Laravel app, open `config/app.php` and, within the `providers` array, append:
 
 ```
-Laracasts\Matryoshka\MatryoshkaServiceProvider::class
+Achillesp\Matryoshka\MatryoshkaServiceProvider::class
 ```
 
 ### Config
@@ -64,7 +64,7 @@ The directive needs an identifier, which can be either a unique string, a Model 
 In order to cache a Model, one more step is needed. You need to use the Cacheable trait in your Model.
 
 ```php
-use Laracasts\Matryoshka\Cacheable;
+use Achillesp\Matryoshka\Cacheable;
 
 class Post extends Eloquent
 {
