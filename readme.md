@@ -29,9 +29,9 @@ This package uses a config file which you can override by publishing to your con
 php artisan vendor publish --provider=MatryoshkaServiceProvider --tag=config
 ```
 
-In the config file you can set the tag that the cache uses. You can also set it to null if you can't use a cache that supports tagging (eg. Memcached or Redis). 
+In the config file you can set the tag that the cache uses. If you can't use a cache that supports tagging, set it to null. 
 
-Also in the config file, you can set whether you want to flush caches on local machine to help with development.
+Also in the config file, you can set whether you want to flush caches on your local machine to help with development.
 
 ## Usage
 
@@ -82,3 +82,6 @@ class Post extends Eloquent
 @endcache
 ```
 
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
